@@ -4,7 +4,7 @@
 export const SITE_TITLE = "Simon Pamies";
 export const SITE_DESCRIPTION =
   "Cloud architect and product-minded CTO specializing in distributed systems, AI/ML, and venture building.";
-export const TWITTER_HANDLE = "@spamies";
+export const TWITTER_HANDLE = "@spamsch";
 export const MY_NAME = "Simon Pamies";
 
 // setup in astro.config.mjs
