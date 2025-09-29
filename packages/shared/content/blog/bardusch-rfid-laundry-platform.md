@@ -13,7 +13,7 @@ When a customer asked me to digitise industrial laundry logistics, the brief sou
 
 ## Framing the Challenge
 
-- **Volume at the edge:** 12 million garments scanned five times a week; events arrive in bursts from Data gateways.
+- **Volume at the edge:** 12 million garments scanned five times a week; events arrive in bursts from data gateways.
 - **Heterogeneous master data:** Proprietary system still mediates on‑prem ERP payloads that need to coexist with new cloud services.
 - **Analytics without lag:** Warehouse teams, sales, and customers expect dashboards and alerts in under ten seconds.
 - **Regulated operations:** Access models, retention rules, and audit trails must satisfy industrial customers across Europe.
