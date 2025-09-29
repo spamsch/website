@@ -146,7 +146,6 @@
 
     ul:not(:where([class~="prose"] *)):not(.unstyled)>li {
         position: relative;
-        padding-left: 1.375rem;
     }
 
     ul:not(.unset):not(:where([class~="prose"] *)):not(.unstyled)>li::before {
@@ -154,6 +153,12 @@
         left: 0;
         content: "»";
         color: rgb(var(--color-text-muted));
+    }
+
+    ul.unset {
+        list-style: none;
+        margin: 0;
+        padding: 0;
     }
 
     .blog-list {
