@@ -10,7 +10,7 @@ tags:
   - architecture
 ---
 
-Baseline sits at the heart of the WTA tour. Acceptance lists, prize money, rankings, and player support all hinge on it. When I was asked to retire the decades-old ICAD system, failure wasn't an option—players still expect rankings every Monday morning.
+Baseline sits at the heart of the WTA tour. Acceptance lists, prize money, rankings, and player support all hinge on it. When I was asked to retire the decades-old ICAD system, failure wasn't an option—players still expect rankings every Monday morning. I owned the architecture for every component we touched—from the containers we shipped to the analytics pipelines that fed regulators.
 
 ## Keeping the Tour Moving
 
@@ -20,7 +20,7 @@ Baseline sits at the heart of the WTA tour. Acceptance lists, prize money, ranki
 
 ## Architecture In Practice
 
-1. **Modular services on Kubernetes.** I containerised .NET Core domains—tournaments, finance, player services—so teams could iterate independently while still deploying to a unified Azure footprint.
+1. **Modular services on Kubernetes.** I containerised .NET Core domains—tournaments, finance, player services—and defined their interface contracts so teams could iterate independently while still deploying to a unified Azure footprint.
 
 2. **Data orchestration with guardrails.** I designed ODBC/Dapper bridges to pull from Sybase, built validation services to reconcile deltas, and curated Azure SQL views to feed Power BI without letting legacy quirks leak everywhere.
 
@@ -37,4 +37,4 @@ Baseline sits at the heart of the WTA tour. Acceptance lists, prize money, ranki
 
 ## Lessons Worth Sharing
 
-Replacing mission-critical systems is as much about governance as code. By pairing containerised services with relentless communication, I delivered a modern platform without missing a single tournament deadline. Today Baseline is a foundation the WTA can evolve instead of a liability they tiptoe around.
+Replacing mission-critical systems is as much about governance as code. By pairing containerised services with relentless communication, I delivered a modern platform end-to-end without missing a single tournament deadline. Today Baseline is a foundation the WTA can evolve instead of a liability they tiptoe around.
