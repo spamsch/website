@@ -7,7 +7,6 @@ date: 2024-06-10
 order: 3
 tags:
   - project
-  - architecture
 ---
 
 This project digitises trade finance for funders, trustees, and corporates. It’s part factoring engine, part treasury cockpit, and part compliance machine. My job as Cloud Development Architect was to architect every layer—approuters, Spring services, HANA schemas, integration paths, and operations—so every invoice, funding note, and audit trail lived in a platform stakeholders could trust. That required deep knowledge of SAP BTP primitives, from XSUAA and destinations to HANA Cloud sizing, to make the whole stack predictable under audit pressure.

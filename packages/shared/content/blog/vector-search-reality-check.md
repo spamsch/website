@@ -6,8 +6,7 @@ external: false
 date: 2024-04-10
 order: 1
 tags:
-  - architecture
-  - ai/ml
+  - musing
 ---
 
 After shipping multiple RAG systems into production, I’ve learned that vector databases rarely work the way most developers assume. Here’s what is actually happening under the hood and why it matters for your AI applications.

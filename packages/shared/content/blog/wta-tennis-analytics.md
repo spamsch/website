@@ -7,7 +7,6 @@ date: 2023-11-15
 order: 8
 tags:
   - project
-  - architecture
 ---
 
 The WTA needed more than box scores—they needed a platform that turns raw match telemetry into stories coaches can act on and fans want to follow. I designed and delivered the cloud architecture, data governance, and product roadmap that made Tennis Analytics the heartbeat of their tour coverage.

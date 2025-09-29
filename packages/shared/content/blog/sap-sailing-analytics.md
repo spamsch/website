@@ -7,7 +7,6 @@ date: 2023-07-22
 order: 9
 tags:
   - project
-  - architecture
 ---
 
 Sailing is notoriously hard to follow from the shore. When SAP partnered with the Extreme Sailing Series, we needed to make split-second maneuvers and invisible wind shifts visible to everyone. I architected SAP Sailing Analytics—from the first Kieler Woche prototype to Olympic-scale deployments—so telemetry, storytelling, and operations worked in concert.

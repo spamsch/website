@@ -10,7 +10,7 @@ const baseSchema = z.object({
     })
     .int("order must be an integer"),
   tags: z
-    .array(z.enum(["project", "architecture", "opinion", "ai/ml", "rag" ]))
+    .array(z.enum(["project", "architecture", "opinion", "ai/ml", "rag", "musing" ]))
     .nonempty({ message: "Provide at least one tag" }),
   title: z.string({
     required_error: "Required frontmatter missing: title",

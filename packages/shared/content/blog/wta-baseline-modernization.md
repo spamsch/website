@@ -7,7 +7,6 @@ date: 2024-04-12
 order: 5
 tags:
   - project
-  - architecture
 ---
 
 Baseline sits at the heart of the WTA tour. Acceptance lists, prize money, rankings, and player support all hinge on it. When I was asked to retire the decades-old ICAD system, failure wasn't an option—players still expect rankings every Monday morning. I owned the architecture for every component we touched—from the containers we shipped to the analytics pipelines that fed regulators.

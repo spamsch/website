@@ -7,8 +7,6 @@ date: 2024-08-14
 order: 2
 tags:
   - project
-  - architecture
-  - ai/ml
 ---
 
 Most LLM products plateau once conversations span days or departments. Context windows burst, graph stores drift, and costs spike. This project set out to solve that by becoming the cognition layer every AI assistant wishes it had. I led the architecture, research, and implementation from zero to investor-ready.

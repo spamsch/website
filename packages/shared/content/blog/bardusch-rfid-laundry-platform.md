@@ -7,7 +7,6 @@ date: 2024-03-05
 order: 6
 tags:
   - project
-  - architecture
 ---
 
 When a customer asked me to digitise industrial laundry logistics, the brief sounded deceptively simple: ingest every garment scan, keep customer analytics sub‑10 seconds, and do it on SAP Business Technology Platform. In practice that meant handling ~60 million RFID events every week, harmonising legacy ERP semantics, and proving a roadmap from MVP to SaaS.

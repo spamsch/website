@@ -7,7 +7,6 @@ date: 2024-02-28
 order: 7
 tags:
   - project
-  - architecture
 ---
 
 Shell Shipping & Maritime asked me to prove whether ETA Exchange—an email ingestion and NLP pipeline for voyage timestamps—could work in the real world. I owned the architecture, security posture, and ML stack that made the proof of concept credible and gave Shell a path to production.
