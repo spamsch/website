@@ -200,6 +200,64 @@
         color: rgb(var(--color-primary-main));
     }
 
+    .tag-pill.tag-project {
+        --tag-hue: 44 84% 52%;
+        background-color: hsl(var(--tag-hue) / 0.15);
+        border-color: hsl(var(--tag-hue) / 0.45);
+        color: hsl(var(--tag-hue));
+    }
+
+    .theme-sleek.dark .tag-pill.tag-project {
+        background-color: hsl(var(--tag-hue) / 0.3);
+        border-color: hsl(var(--tag-hue) / 0.55);
+    }
+
+    .tag-pill.tag-musing {
+        --tag-hue: 16 34% 82%;
+        background-color: hsl(var(--tag-hue) / 0.15);
+        border-color: hsl(var(--tag-hue) / 0.45);
+        color: hsl(var(--tag-hue));
+    }
+
+    .theme-sleek.dark .tag-pill.tag-musing {
+        background-color: hsl(var(--tag-hue) / 0.3);
+        border-color: hsl(var(--tag-hue) / 0.55);
+    }
+
+    .tag-pill.tag-architecture {
+        --tag-hue: 50 94% 58%;
+        background-color: hsl(var(--tag-hue) / 0.15);
+        border-color: hsl(var(--tag-hue) / 0.45);
+        color: hsl(var(--tag-hue));
+    }
+
+    .theme-sleek.dark .tag-pill.tag-architecture {
+        background-color: hsl(var(--tag-hue) / 0.3);
+        border-color: hsl(var(--tag-hue) / 0.55);
+    }
+
+    .tag-pill.tag-opinion {
+        --tag-hue: 42 100% 46%;
+        background-color: hsl(var(--tag-hue) / 0.15);
+        border-color: hsl(var(--tag-hue) / 0.45);
+        color: hsl(var(--tag-hue));
+    }
+
+    .theme-sleek.dark .tag-pill.tag-opinion {
+        background-color: hsl(var(--tag-hue) / 0.3);
+        border-color: hsl(var(--tag-hue) / 0.55);
+    }
+
+    .blog-tags-line {
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgb(var(--color-text-muted));
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+    }
+
     ol:not(.unset):not(:where([class~="prose"] *)) {
         padding-left: 1.125rem;
     }

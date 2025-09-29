@@ -3,7 +3,7 @@ title: "Launching Privacy-First Live Streaming on AWS"
 description: "What it took to ship a browser-based streaming platform with zero registration, monetisation hooks, and a go-to-market story that resonated with investors."
 draft: false
 external: false
-date: 2024-07-02
+date: 2020-03-02
 order: 7
 tags:
   - project

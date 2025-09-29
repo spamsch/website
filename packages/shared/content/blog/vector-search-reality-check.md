@@ -3,10 +3,12 @@ title: "Vector Search Reality Check: Why Your RAG System Isn’t Finding What Yo
 description: "The uncomfortable truth about vector databases and what actually happens when you search millions of high-dimensional embeddings."
 draft: false
 external: false
-date: 2024-04-10
+date: 2025-06-30
 order: 1
 tags:
   - musing
+  - ai/ml
+  - rag
 ---
 
 After shipping multiple RAG systems into production, I’ve learned that vector databases rarely work the way most developers assume. Here’s what is actually happening under the hood and why it matters for your AI applications.

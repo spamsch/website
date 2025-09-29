@@ -3,7 +3,7 @@ title: "Engineering an eJet surfboard: From Battery Packs to Cloud Telemetry"
 description: "How I turned an electric surfboard concept into a certified, connected product with hardware, firmware, IoT, and operations moving in lockstep."
 draft: false
 external: false
-date: 2024-05-08
+date: 2025-02-01
 order: 4
 tags:
   - project

@@ -51,19 +51,16 @@ const sortedPosts = posts
                   </a>
                 )}
               </div>
+              {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
+                <div class="blog-tags-line mt-2">
+                  <span>Tags:</span>
+                  <span>{post.frontmatter.tags.join(", ")}</span>
+                </div>
+              )}
               {post.frontmatter.description && (
-                <p class="mt-2 text-sm text-text-muted">
+                <p class="mt-2 text-sm text-text-muted leading-relaxed">
                   {post.frontmatter.description}
                 </p>
-              )}
-              {post.frontmatter.tags && (
-                <ul class="unstyled mt-3 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-text-muted">
-                  {post.frontmatter.tags.map((tag) => (
-                    <li class="tag-pill rounded-full border border-border-subtle px-3 py-1" key={tag}>
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
               )}
             </li>
           );

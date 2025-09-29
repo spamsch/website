@@ -3,7 +3,7 @@ title: "Architecting Shell's ETA Exchange: Email Ingestion That Maritime Ops Can
 description: "How I turned a proof of concept for extracting voyage timestamps from masters' emails into a secure, human-led machine-assisted platform roadmap."
 draft: false
 external: false
-date: 2024-02-28
+date: 2024-01-28
 order: 7
 tags:
   - project
