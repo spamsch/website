@@ -4,11 +4,10 @@ import matter from "gray-matter";
 import fs from "fs/promises";
 import { globby } from "globby";
 import Markdoc from "@markdoc/markdoc";
-import { fileURLToPath } from "url";
 import { config } from "./markdoc.config";
 
-// Resolve the content directory relative to this file so dev/build use the same base path
-const contentDirectory = fileURLToPath(new URL("../../content", import.meta.url));
+// Resolve from project root so builds and dev servers locate content identically
+const contentDirectory = path.resolve(process.cwd(), "packages/shared/content");
 
 async function parseAndTransform({ content }: { content: string }) {
   const ast = Markdoc.parse(content);
