@@ -12,22 +12,25 @@ const posts = await readAll({
 
 const sortedPosts = posts
   .filter((p) => p.frontmatter.draft !== true)
-  .sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).valueOf() -
-      new Date(a.frontmatter.date).valueOf()
-  );
+  .sort((a, b) => a.frontmatter.order - b.frontmatter.order);
 ---
 
 <PageLayout>
   <PageMeta title={`Blog | ${SITE_TITLE}`} slot="meta" />
   <section slot="main">
-    <ul>
+    <div class="mb-8 text-text-normal">
+      <p>
+        I use this space to unpack the work I lead—large-scale platforms, hardware-plus-software builds,
+        AI memory systems—as well as the technical ideas I keep tinkering with. Expect opinionated lessons
+        learned, detailed architecture notes, and the occasional musing about where tech is headed next.
+      </p>
+    </div>
+    <ul class="blog-list">
       {
         sortedPosts.map((post) => {
           return (
-            <li class="mb-6">
-              <div class="title">
+            <li class="mb-6 blog-list-item">
+              <div class="title blog-list-title">
                 {post.frontmatter.external ? (
                   <a
                     href={post.frontmatter.url}
@@ -52,6 +55,15 @@ const sortedPosts = posts
                 <p class="mt-2 text-sm text-text-muted">
                   {post.frontmatter.description}
                 </p>
+              )}
+              {post.frontmatter.tags && (
+                <ul class="unstyled mt-3 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-text-muted">
+                  {post.frontmatter.tags.map((tag) => (
+                    <li class="tag-pill rounded-full border border-border-subtle px-3 py-1" key={tag}>
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
               )}
             </li>
           );

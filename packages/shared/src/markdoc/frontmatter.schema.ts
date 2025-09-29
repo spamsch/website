@@ -3,6 +3,15 @@ import { z } from "zod";
 const baseSchema = z.object({
   draft: z.boolean().default(false),
   featured: z.boolean().default(false),
+  order: z
+    .number({
+      required_error: "Required frontmatter missing: order",
+      invalid_type_error: "order must be a number",
+    })
+    .int("order must be an integer"),
+  tags: z
+    .array(z.enum(["project", "architecture", "opinion", "ai/ml", "rag" ]))
+    .nonempty({ message: "Provide at least one tag" }),
   title: z.string({
     required_error: "Required frontmatter missing: title",
     invalid_type_error: "title must be a string",
