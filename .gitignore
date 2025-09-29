@@ -1,0 +1,30 @@
+# Build output
+dist/
+.astro/
+.output/
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Caches and tooling
+.turbo/
+.vite/
+.eslintcache
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment and local config
+.env*
+*.local
+
+# OS / Editor debris
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
