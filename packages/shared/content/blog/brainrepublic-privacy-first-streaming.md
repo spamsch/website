@@ -1,5 +1,5 @@
 ---
-title: "Brainrepublic: Launching Privacy-First Live Streaming on AWS"
+title: "Launching Privacy-First Live Streaming on AWS"
 description: "What it took to ship a browser-based streaming platform with zero registration, monetisation hooks, and a go-to-market story that resonated with investors."
 draft: false
 external: false
@@ -9,7 +9,7 @@ tags:
   - project
 ---
 
-Before "privacy-first" became a marketing trope, Brainrepublic committed to it. No account creation. No personal data retention. Just experts going live in the browser with optional pay-per-minute billing. Turning that promise into a product meant I had to thread architecture, positioning, and stakeholder expectations together.
+Before "privacy-first" became a marketing trope, Brainrepublic committed to it in 2015. No account creation. No personal data retention. Just experts going live in the browser with optional pay-per-minute billing. Turning that promise into a product meant I had to thread architecture, positioning, and stakeholder expectations together.
 
 ## Product Constraints We Embraced
 

@@ -1,5 +1,5 @@
 ---
-title: "Designing Bardusch's RFID Laundry Platform for 60 Million Weekly Scans"
+title: "Designing a RFID Laundry Platform for 60 Million Weekly Scans"
 description: "How I engineered a SAP BTP architecture that ingests 60 million RFID events per week while staying fast, governable, and ready for SaaS expansion."
 draft: false
 external: false
@@ -10,12 +10,12 @@ tags:
   - architecture
 ---
 
-When bardusch asked me to digitise industrial laundry logistics, the brief sounded deceptively simple: ingest every garment scan, keep customer analytics sub‑10 seconds, and do it on SAP Business Technology Platform. In practice that meant handling ~60 million RFID events every week, harmonising legacy ERP semantics, and proving a roadmap from MVP to SaaS.
+When a customer asked me to digitise industrial laundry logistics, the brief sounded deceptively simple: ingest every garment scan, keep customer analytics sub‑10 seconds, and do it on SAP Business Technology Platform. In practice that meant handling ~60 million RFID events every week, harmonising legacy ERP semantics, and proving a roadmap from MVP to SaaS.
 
 ## Framing the Challenge
 
-- **Volume at the edge:** 12 million garments scanned five times a week; events arrive in bursts from Data Mars gateways.
-- **Heterogeneous master data:** BISS still mediates on‑prem ERP payloads that need to coexist with new cloud services.
+- **Volume at the edge:** 12 million garments scanned five times a week; events arrive in bursts from Data gateways.
+- **Heterogeneous master data:** Proprietary system still mediates on‑prem ERP payloads that need to coexist with new cloud services.
 - **Analytics without lag:** Warehouse teams, sales, and customers expect dashboards and alerts in under ten seconds.
 - **Regulated operations:** Access models, retention rules, and audit trails must satisfy industrial customers across Europe.
 
@@ -25,7 +25,7 @@ When bardusch asked me to digitise industrial laundry logistics, the brief sound
 
 2. **Tiered storage strategy.** I kept hot data in SAP HANA Cloud with columnar compression and adaptive indexes. Once utilisation hit 40 %, scripted jobs aged events into SAP IQ so ad‑hoc analytics still performed while costs stayed predictable.
 
-3. **Governed APIs over BISS semantics.** I reused the canonical vocab from the legacy BISS proxy so mobile apps, customer portals, and ERP integrations speak the same language. Token‑secured REST endpoints expose inventory, route, and SLA KPIs without double modelling.
+3. **Governed APIs over BISS semantics.** I reused the canonical vocab from the legacy proxy so mobile apps, customer portals, and ERP integrations speak the same language. Token‑secured REST endpoints expose inventory, route, and SLA KPIs without double modelling.
 
 4. **Infrastructure as a product.** I treated subaccounts, CI/CD, monitoring, and runbooks as first-class deliverables. Provisioning packs captured network layouts, identity trust, and release cadences so bardusch operations could adopt the platform without hand-holding.
 
@@ -38,4 +38,4 @@ When bardusch asked me to digitise industrial laundry logistics, the brief sound
 
 ## What I Took Forward
 
-Large-scale IoT on SAP BTP works when you treat ingestion, storage, and documentation as one system. By baking governance and observability into the first release, I gave bardusch a platform they can scale, repackage as SaaS, and hand over to operations with confidence. That blueprint has since become my default playbook for high-volume, compliance-heavy data platforms.
+Large-scale IoT on SAP BTP works when you treat ingestion, storage, and documentation as one system. By baking governance and observability into the first release, I gave the customer a platform they can scale, repackage as SaaS, and hand over to operations with confidence. That blueprint has since become my default playbook for high-volume, compliance-heavy data platforms.

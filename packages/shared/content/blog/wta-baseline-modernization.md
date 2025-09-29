@@ -16,7 +16,7 @@ Baseline sits at the heart of the WTA tour. Acceptance lists, prize money, ranki
 
 - **Zero downtime tolerance.** Tournaments, regulators, and broadcasters rely on fresh data. We planned migration waves around competition calendars and provided fallbacks for every service cutover.
 - **Hybrid data reality.** Sybase remained the system of record; Azure SQL shouldered analytics and modern features. We built connectors and caching layers that respected both worlds.
-- **Stakeholders beyond engineering.** Operations, KPMG, Revstar, and ITF all had skin in the game. Roadmaps, risk logs, and comms packs turned architecture into a shared conversation.
+- **Stakeholders beyond engineering.** Operations, KPMG and ITF all had skin in the game. Roadmaps, risk logs, and comms packs turned architecture into a shared conversation.
 
 ## Architecture In Practice
 

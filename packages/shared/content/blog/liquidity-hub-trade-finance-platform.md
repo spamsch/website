@@ -1,5 +1,5 @@
 ---
-title: "Running Trade Finance on SAP BTP: Inside Liquidity Hub"
+title: "Running Trade Finance on SAP BTP"
 description: "Designing a multi-tenant SAP BTP landscape with factoring workflows, CI/CD discipline, and disaster-recovery drills that keep financiers and regulators comfortable."
 draft: false
 external: false
@@ -10,11 +10,11 @@ tags:
   - architecture
 ---
 
-Liquidity Hub digitises trade finance for funders, trustees, and corporates. It’s part factoring engine, part treasury cockpit, and part compliance machine. My job as Cloud Development Architect was to make sure every invoice, funding note, and audit trail lived in a platform stakeholders could trust.
+This project digitises trade finance for funders, trustees, and corporates. It’s part factoring engine, part treasury cockpit, and part compliance machine. My job as Cloud Development Architect was to make sure every invoice, funding note, and audit trail lived in a platform stakeholders could trust.
 
 ## The Environment We Built
 
-- **Three BTP landscapes.** I carved out separate subaccounts (`orbian-d`, `orbian-m`, `orbian-p`) with dedicated approuters, Spring Boot services, and HANA schemas so upgrades never crossed wires.
+- **Three BTP landscapes.** I carved out separate subaccounts with dedicated approuters, Spring Boot services, and HANA schemas so upgrades never crossed wires.
 - **XSUAA everywhere.** I defined role-based scopes to protect REST APIs, funding workflows, and admin consoles while keeping audit logs straightforward.
 - **Connectivity to SAP S/4HANA.** I engineered destinations and connectivity services to bridge secure tunnels without leaking credentials or exposing brittle middleware.
 
@@ -33,4 +33,4 @@ Liquidity Hub digitises trade finance for funders, trustees, and corporates. It�
 
 ## Takeaway
 
-Enterprise fintech is a trust business. By marrying SAP BTP services with disciplined engineering practices, I delivered a platform where auditors, funders, and developers can work together without friction. Liquidity Hub is proof that cloud agility and regulated environments aren’t mutually exclusive.
+Enterprise fintech is a trust business. By marrying SAP BTP services with disciplined engineering practices, I delivered a platform where auditors, funders, and developers can work together without friction. This project is proof that cloud agility and regulated environments aren’t mutually exclusive.

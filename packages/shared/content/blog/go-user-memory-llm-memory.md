@@ -1,5 +1,5 @@
 ---
-title: "Go User Memory: Building Long-Term Recall for AI Products"
+title: "LLM Memory: Building Long-Term Recall for AI Products"
 description: "Designing a hybrid retrieval memory fabric that keeps LLM assistants accurate, explainable, and affordable for enterprise workloads."
 draft: false
 external: false
@@ -11,7 +11,7 @@ tags:
   - ai/ml
 ---
 
-Most LLM products plateau once conversations span days or departments. Context windows burst, graph stores drift, and costs spike. Go User Memory set out to solve that by becoming the cognition layer every AI assistant wishes it had. I led the architecture, research, and implementation from zero to investor-ready.
+Most LLM products plateau once conversations span days or departments. Context windows burst, graph stores drift, and costs spike. This project set out to solve that by becoming the cognition layer every AI assistant wishes it had. I led the architecture, research, and implementation from zero to investor-ready.
 
 ## What We Set Out to Build
 
@@ -37,4 +37,4 @@ Most LLM products plateau once conversations span days or departments. Context w
 
 ## Result
 
-Go User Memory isn’t just a feature; it’s the backbone that lets AI assistants stay coherent over time. By combining rigorous retrieval science with pragmatic engineering, I built a memory fabric enterprises can trust and startups can actually ship.
+LLM Memory isn’t just a feature; it’s the backbone that lets AI assistants stay coherent over time. By combining rigorous retrieval science with pragmatic engineering, I built a memory fabric enterprises can trust and startups can actually ship.
