@@ -26,7 +26,7 @@ This project digitises trade finance for funders, trustees, and corporates. Itâ€
 
 ## Outcomes That Stuck
 
-- **Launch readiness sign-off** from Orbian leadership thanks to the RACI charts, service desks, and incident playbooks I authored.
+- **Launch readiness sign-off** from leadership thanks to the RACI charts, service desks, and incident playbooks I authored.
 - **Design partners on-boarded** with confidence because they saw the same transparency in documentation that regulators expect.
 - **Operations autonomy** once I handed over dashboards, logs, and alerting tuned to their workflowsâ€”not generic cloud metrics.
 
