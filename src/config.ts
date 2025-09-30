@@ -3,7 +3,7 @@
 
 export const SITE_TITLE = "Simon Pamies";
 export const SITE_DESCRIPTION =
-  "Cloud architect and product-minded CTO specializing in distributed systems, AI/ML, and venture building.";
+  "Cloud architect and tech product strategist specializing in distributed systems, AI/ML, and hardware to cloud.";
 export const TWITTER_HANDLE = "@spamsch";
 export const MY_NAME = "Simon Pamies";
 
