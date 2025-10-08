@@ -9,10 +9,9 @@ tags:
   - musing
   - sap
   - enterprise-architecture
-  - btp
 ---
 
-When SAP describes **Clean Core**, it evokes a future: minimal kernel modifications, side-by-side extensions, and upgrades that “just work.” It’s the right direction. But in large brownfield environments, reality rarely cooperates. Having spent years building on SAP BTP, HANA, and connected systems rather than in the ERP kernel, I see Clean Core less as a code hygiene program and more as an **integration architecture challenge**. This is a reality check — and a pragmatic view of how to use BTP to make Clean Core achievable in practice.
+When SAP describes **Clean Core**, it evokes a future: minimal kernel modifications, side-by-side extensions, and upgrades that “just work.” It’s the right direction. But in large brownfield environments, reality rarely cooperates. Having spent years architecting on SAP BTP, HANA, and connected systems rather than in the ERP kernel, I see Clean Core less as a code hygiene program and more as an **integration architecture challenge**. This is a reality check — and a pragmatic view of how to use BTP to make Clean Core achievable in practice.
 
 ## My Lens: Experience First, Theory Second
 
@@ -113,3 +112,48 @@ Clean Core is not a constraint; it’s an **operating model for evolution**.
 BTP, when used as the integration and innovation layer, makes that evolution sustainable. It offers the elasticity, tooling, and decoupling the ERP core was never designed for.
 
 Treat Clean Core as a journey where the ERP kernel becomes leaner, BTP becomes richer, and enterprise agility improves through separation of concerns. The outcome is not just technical cleanliness — it’s operational resilience and architectural freedom.
+
+## From the Field: Clean Core in Practice
+
+Below are concrete snapshots where I’ve architected SAP solutions and steered Clean Core from slideware into operating reality. Some are lightly anonymised; one is a composite to illustrate common decisions.
+
+### Trade Finance on BTP (Real)
+
+- Context: Multi‑tenant BTP platform for factoring and treasury workflows. I owned the landscape: XSUAA roles/scopes, approuters, Spring services, and HANA Cloud schemas. Connectivity bridged to S/4HANA via destinations and principal propagation.
+- Clean Core stance: All workflow orchestration lived in CAP/Spring (Level A). S/4 exposure limited to released APIs and events for postings, business partners, and attachments (Level A/B). No kernel mods.
+- What made it hard: Legacy spreadsheets encoded eligibility rules. Business wanted “the same behavior.” We translated rules into explicit services and versioned contracts, then ran them in shadow mode before cutover.
+- What worked: API Management as the perimeter, ATC on ABAP Cloud stubs, and CTMS/GitLab pipelines enforcing evidence at every promotion. Upgrades became routine because the core surface area stayed small.
+- Result: We shipped without touching the kernel, passed independent pen tests, and kept auditors happy with deterministic runbooks and point‑in‑time recovery rehearsals.
+
+### RFID Laundry at 60M Events/Week (Real)
+
+- Context: Industrial IoT workload on BTP Kyma. NATS queues ingested RFID scans; hot data in HANA Cloud, warm in SAP IQ. Legacy ERP remained the record for some master data.
+- Clean Core stance: ERP integrations used governed REST semantics; no direct table writes. Orchestration, dedupe, replay, and analytics sat outside the core (Level A). Where the proxy system spoke proprietary payloads, we applied a canonical vocabulary and adapters.
+- What made it hard: Master data heterogeneity and bursty ingestion from gateways. Pushing “clever logic” into ERP would have been tempting—but wrong for upgrades and scale.
+- What worked: Event‑first design, tiered storage, and a stable contract that mobile apps, customer portals, and ERP all shared. We could evolve features without renegotiating ERP internals.
+
+### Pricing & Approvals Strangler (Composite)
+
+- Context: Brownfield S/4 with decades of Z‑pricing, PDF generation, and approval exits.
+- Clean Core move: Externalised pricing adjustments and approvals to CAP services on BTP (Level A); kept a small ABAP Cloud wrapper to subscribe to business events and publish decisions back via released APIs (Level A/B).
+- Managed debt: One edge case required an unreleased read for batch determination. We encapsulated it behind a façade, logged usage, and set a remediation target (Level C treated as temporary).
+- Result: Document creation, approvals, and “special pricing” logic moved out of upgrade paths. When S/4 upgraded, the ABAP wrapper and CAP contracts remained stable.
+
+## Patterns That Keep Me Out of Level D
+
+- Event the seams: Prefer events + idempotent consumers over deep synchronous calls across the core boundary.
+- Façade any internals: If you must touch unreleased objects, wrap them, tag them (owner, risk, removal plan), and monitor at runtime.
+- Shadow before cutover: Run externalised logic in observe‑only mode to build confidence without risking business flow.
+- Registry for extensions: Maintain an inventory of Level A–D artifacts with owners, SLAs, and audit notes; review after every release.
+- API perimeter first: Put API Management in front of S/4 and BTP services early; how you expose and version today determines your upgrade pain later.
+
+## Anti‑Patterns I Avoid
+
+- “Tiny change in the core” for speed that becomes a permanent D‑level dependency.
+- UI embedded in ERP for workflows that belong in BTP apps.
+- Point RFCs that bypass governance instead of using destinations and released interfaces.
+- Analytical joins in the transactional schema when HANA Cloud or federation fits better.
+
+## A Final Reality Check
+
+You don’t adopt Clean Core by decree—you earn it release by release. In the projects above, the win wasn’t zero custom code; it was relocating intent: transactions in S/4, orchestration and intelligence on BTP, with clear contracts between them. That’s the version of Clean Core that survives audits, upgrades, and growth.
