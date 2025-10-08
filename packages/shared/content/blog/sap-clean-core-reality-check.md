@@ -1,6 +1,6 @@
 ---
 title: "Clean Core Reality Check: Why It’s Hard for Big SAP Landscapes"
-description: "The gap between SAP's Clean Core promise and the messy reality of enterprise brownfield systems with decades of custom code."
+description: "The gap between SAP's Clean Core promise and the messy reality of enterprise brownfield systems with decades of custom code — and how BTP helps close it."
 draft: false
 external: false
 date: 2025-10-02
@@ -9,98 +9,107 @@ tags:
   - musing
   - sap
   - enterprise-architecture
+  - btp
 ---
 
-When SAP describes **Clean Core**, it evokes a future: minimal kernel modifications, side-by-side extensions, and upgrades that “just work.” That’s a worthy vision. But having worked across many large enterprises with decades of tangled custom code, I see a persistent gap between that promise and what’s feasible. This is my reality check: what breaks, what can be salvaged, and how to chart a pragmatic path forward.
+When SAP describes **Clean Core**, it evokes a future: minimal kernel modifications, side-by-side extensions, and upgrades that “just work.” It’s the right direction. But in large brownfield environments, reality rarely cooperates. Having spent years building on SAP BTP, HANA, and connected systems rather than in the ERP kernel, I see Clean Core less as a code hygiene program and more as an **integration architecture challenge**. This is a reality check — and a pragmatic view of how to use BTP to make Clean Core achievable in practice.
 
 ## My Lens: Experience First, Theory Second
 
-Long before “Clean Core” became SAP’s branded concept, I led projects where we followed its spirit: isolate custom logic, limit coupling, and treat architectural hygiene as a deliverable. Over time, I’ve seen what works, what fails, and how SAP’s evolving model dovetails (or clashes) with real technical debt.
+Before “Clean Core” was branded as a strategy, I already saw the same principle applied successfully: isolate the ERP core, externalize orchestration, and integrate via clear contracts. The core handles transactions; BTP and its services handle intelligence, coordination, and user interaction. That separation works — but only if the boundaries are explicit and governed.
 
-Because of that experience, when SAP recently refined Clean Core into four extensibility levels — A, B, C, and D — I recognized it as a more useful framing for what I’d instinctively practiced. But it also reveals exactly where many teams get stuck.
+When SAP introduced the **four extensibility levels (A–D)**, it formalized what many architects had been doing informally: treating the ERP core as a stable nucleus, with different degrees of permissible coupling around it. For someone coming from BTP architecture, this classification finally connects to real deployment design.
 
 ## SAP’s Four Levels: A More Granular Clean Core
 
-SAP has moved away from a binary “clean vs dirty” view. The new model defines:
-
 | Level | Description | Use Cases / Risk |
 |-------|--------------|------------------|
-| **A** | The cleanest form — in-core ABAP Cloud or side-by-side CAP / SAP Build using released APIs and extension points | Best for new logic, lightweight enhancements, future-proofing |
-| **B** | Classic ABAP using officially released APIs, BAdIs, exits, frameworks | Goes beyond what Level A can cover, but sticks to supported paths |
-| **C** | Involves internal or unreleased objects, wrapped or tracked with caution | A “conditional” zone — allowed with governance and changelog discipline |
-| **D** | Non-compliant: system modifications, implicit enhancements, unsupported techniques | Declared “dirty core” territory to avoid or remediate |
-
-This shift matters. It gives you a **scale** to reason about trade-offs rather than an all-or-nothing judgment. In mature landscapes, few reach “pure A”; many settle between **A + B + C** with continuous cleanup.
+| **A** | The cleanest form — in-core ABAP Cloud or side-by-side on BTP using released APIs, events, or OData services | Ideal for extensions, analytics, or automation without touching the kernel |
+| **B** | Classic ABAP using officially released APIs, BAdIs, or framework exits | Transitional zone where core still hosts logic under guardrails |
+| **C** | Involves internal or unreleased objects, wrapped or tracked with caution | Needed when no public interface exists; document and monitor rigorously |
+| **D** | Non-compliant: modifications or implicit enhancements | Should be eliminated or sandboxed out of upgrade-critical paths |
 
 ## Why Enterprises Struggle to Achieve Clean Core
 
 ### 1. Deep Legacy Entanglement
-Decades of enhancements often weave custom logic into the standard flow. Untangling that is dangerous and expensive. Sometimes you break visible behavior; sometimes you break hidden side effects.
+Custom logic is interwoven with standard processes. Detangling it safely is expensive and can jeopardize existing business behavior.
 
 ### 2. Missing or Unreleased Extension Points
-The kernel logic you need to tweak may have no released API, BAdI, or event. You either wrap it, re-implement, or file influence requests with SAP. That gap forces compromises.
+Many classic SAP modules still lack event exposure or APIs. Without those, the only clean way out is replication or abstraction.
 
-### 3. Governance Overhead Is Real
-Clean Core demands discipline: code reviews, ATC checks, extension registries, change tracking. Many organizations don’t have the structure or culture to sustain this long term.
+### 3. Governance Overhead
+Clean Core is not only a coding rule but a process discipline — requiring code reviews, ATC checks, change control, and documentation.
 
-### 4. Latency, Consistency, Reliability
-Moving logic off-core (via APIs or microservices) introduces latency, failure modes, and consistency challenges. For high-frequency, tightly coupled operations, side-by-side isn’t always acceptable.
+### 4. Latency and Data Integrity
+Offloading computation to external systems introduces latency and potential data drift. BTP can mitigate this, but only if you design sync patterns and event pipelines correctly.
 
-### 5. Migration & Debt Inertia
-Auditing, refactoring, validating, and replacing custom code is expensive — especially when some enhancements are low visibility but high risk. Some get “frozen” rather than touched.
+### 5. Migration & Inertia
+Auditing, refactoring, and replacing legacy custom code takes time, budget, and buy-in. Without executive alignment, progress stalls.
 
-### 6. Skepticism & Politics
-Some view Clean Core as SAP trying to constrain flexibility. That perception, regardless of validity, slows adoption.
+### 6. Organizational Distrust
+Some stakeholders interpret Clean Core as SAP’s way to centralize control. The truth is simpler: it’s a technical necessity for continuous delivery in hybrid landscapes.
 
-## What Happens in Practice
+## Where BTP Becomes the Enabler
 
-- You uncover “innocent-looking” custom objects that depend on core internals.  
-- Attempts to externalize yield brittle seams rather than clean decoupling.  
-- Governance slips: “just this patch” becomes normalized.  
-- Latency or sync issues surface in production.  
-- Upgrades still hurt because some Level C/D artifacts persist.
+### 1. **Clean Extension Layer**
+BTP is the **landing zone for extension logic** that doesn’t belong inside S/4HANA. CAP (Cloud Application Programming Model) or Kyma workloads provide managed runtime environments for microservices that consume and expose released SAP APIs.  
 
-Most real SAP estates end up somewhere in a “guarded custom” zone, not a pristine core.
+- **CAP for structured extensions:** build service layers around released APIs, OData, or CDS views.  
+- **SAP Build and UI5:** push user experience adaptations off the ERP stack.  
+- **Event Mesh and Integration Suite:** decouple synchronous core calls into asynchronous processes, protecting upgrade stability.
 
-## A Pragmatic, Experience-Grounded Playbook
+### 2. **Data Persistence & Analytics**
+HANA Cloud on BTP can serve as the **extension data layer** — hosting analytical replicas, pre-aggregations, or cross-system joins without polluting the transactional schema.  
 
-### 1. Measure First
-Use SAP’s Custom Code Migration app or Readiness Check to inventory all custom objects, annotate usage, coupling, and degree of reliance on released APIs.  
-Classify each artifact into A / B / C / D using SAP’s API or Repository tools.
+- Mirror relevant business objects via Change Data Capture (CDC) or ODP.  
+- Create virtual tables or federated queries for read-only insight.  
+- Keep heavy computations (aggregation, forecasting, scoring) out of ERP memory.  
 
-**Hands-on pattern:** export the code list, score each on complexity, frequency, API usage, and risk. Shade into green (safe to externalize), yellow (needs vetting), red (stay internal for now). That heat map frames your roadmap.
+This shifts performance and innovation pressure off the core while keeping data accessible with low latency.
 
-### 2. Selective Refactoring
-- Push modular, loosely coupled logic outward (BTP, CAP) when possible.  
-- For high-throughput or latency-sensitive routines, keep them in-core (via ABAP Cloud) using released APIs.  
-- Where no released API exists, wrap internals behind facades, log influence requests, and treat them as **temporary Level C debt**.
+### 3. **Integration Governance**
+SAP Integration Suite, combined with API Management, provides a **policy-driven perimeter** for Clean Core. You can define:
 
-**Example:** a pricing routine executed thousands of times per hour stays in-core via a released BAdI with unit tests and monitoring. A monthly report runs in CAP off-core.
+- Which APIs are released for external use.  
+- Who can consume them and how they’re versioned.  
+- How backward compatibility and change tracking are enforced.
 
-### 3. Enforce Guardrails
-- Define a clear taxonomy: which extension types are allowed (key user, ABAP Cloud, side-by-side).  
-- Configure ATC with custom checks to block nonreleased object access or direct kernel modifications.  
-- Maintain an extension registry mapping each custom object to its business owner, risk level, and remediation plan.
+This is architectural Clean Core, not code-level purity — but it’s equally critical.
 
-### 4. Continuous Remediation
-- After each patch or upgrade, rescan custom objects.  
-- Record violations or drift and create backlog stories.  
-- Include a “clean core impact review” in new feature design: Will this new work fit into Level A/B? If not, document why.
+### 4. **Continuous Compliance**
+With CI/CD on BTP (via Cloud Transport Management or GitLab pipelines), you can automate static analysis and ATC scans for all ABAP Cloud or CAP services before transport. That ensures compliance to Clean Core rules at build time rather than after deployment.
 
-### 5. Embrace Pragmatic Trade-Offs
-- Aim for directionality over perfection.  
-- Accept some Level C artifacts temporarily (with strong governance).  
-- Never normalize Level D. Treat it as debt to be paid.  
-- Gradually push your estate toward safer, upgradeable forms.
+### 5. **Gradual Offloading Strategy**
+Use BTP to **depressurize the core incrementally**:
 
-### 6. Leverage SAP’s Conceptual Guidance
-SAP’s four-level model gives clarity about boundary conditions and risk tiers. It legitimizes incremental approaches and helps structure stakeholder discussions.  
-Use SAP tools like the API Hub and Cloudification Repository to classify objects into levels A–D.
+- Start with low-risk modules like reporting, analytics, or workflow automation.  
+- Externalize step by step: pricing logic → document generation → approval flows → custom UI components.  
+- Retain transactional integrity in S/4 while moving orchestration and intelligence to BTP.  
 
-Also remember: Clean Core is not about zero custom code — it’s about **controlled, decoupled, upgrade-safe custom logic** rather than hacks.
+Over time, BTP becomes your extensibility perimeter — the zone where new innovation happens without touching the ERP kernel.
 
-## Summary: Clean Core as a Journey, Not a Destination
+## A Pragmatic Playbook
 
-Clean Core is a powerful, necessary ideal. But in large, brownfield SAP landscapes, reaching “100% clean” is unlikely. The true value lies in incremental improvement: reduce coupling, limit drift, enforce guardrails, and continuously push your custom estate toward safer extensibility modes.
+### Measure First
+Inventory custom code with the Custom Code Migration app or Readiness Check. Classify by coupling, business value, and migration difficulty. Map to the A–D levels.
 
-Your goal isn’t fanatical purity — it’s sustainable evolution. Over time, you decrease risk, improve upgrade resilience, and make innovation safer, not more painful.
+### Selective Refactoring
+- Push modular logic outward to CAP, Integration Suite, or Functions.  
+- Keep performance-critical routines in ABAP Cloud via released APIs.  
+- For unreleased internals, use a façade and treat it as managed debt.
+
+### Enforce Guardrails
+Implement ATC with custom rules to detect internal calls. Maintain an extension registry that records the level (A–D), business owner, and lifecycle plan for each artifact.
+
+### Continuous Remediation
+Reassess after every upgrade cycle. Move Level C/D artifacts upward where possible. Include Clean Core compliance in change advisory boards.
+
+### Accept Compromise
+Clean Core isn’t binary. It’s iterative debt reduction. The point is not zero custom code but **controlled, observable, and upgrade-stable custom logic**.
+
+## The Real Architectural Lesson
+
+Clean Core is not a constraint; it’s an **operating model for evolution**.  
+BTP, when used as the integration and innovation layer, makes that evolution sustainable. It offers the elasticity, tooling, and decoupling the ERP core was never designed for.
+
+Treat Clean Core as a journey where the ERP kernel becomes leaner, BTP becomes richer, and enterprise agility improves through separation of concerns. The outcome is not just technical cleanliness — it’s operational resilience and architectural freedom.
