@@ -50,14 +50,14 @@ Some stakeholders interpret Clean Core as SAP’s way to centralize control. The
 
 ## Where BTP Becomes the Enabler
 
-### 1. **Clean Extension Layer**
+### 1. Clean Extension Layer
 BTP is the **landing zone for extension logic** that doesn’t belong inside S/4HANA. CAP (Cloud Application Programming Model) or Kyma workloads provide managed runtime environments for microservices that consume and expose released SAP APIs.  
 
 - **CAP for structured extensions:** build service layers around released APIs, OData, or CDS views.  
 - **SAP Build and UI5:** push user experience adaptations off the ERP stack.  
 - **Event Mesh and Integration Suite:** decouple synchronous core calls into asynchronous processes, protecting upgrade stability.
 
-### 2. **Data Persistence & Analytics**
+### 2. Data Persistence & Analytics
 HANA Cloud on BTP can serve as the **extension data layer** — hosting analytical replicas, pre-aggregations, or cross-system joins without polluting the transactional schema.  
 
 - Mirror relevant business objects via Change Data Capture (CDC) or ODP.  
@@ -66,7 +66,7 @@ HANA Cloud on BTP can serve as the **extension data layer** — hosting analytic
 
 This shifts performance and innovation pressure off the core while keeping data accessible with low latency.
 
-### 3. **Integration Governance**
+### 3. Integration Governance
 SAP Integration Suite, combined with API Management, provides a **policy-driven perimeter** for Clean Core. You can define:
 
 - Which APIs are released for external use.  
@@ -75,10 +75,10 @@ SAP Integration Suite, combined with API Management, provides a **policy-driven 
 
 This is architectural Clean Core, not code-level purity — but it’s equally critical.
 
-### 4. **Continuous Compliance**
+### 4. Continuous Compliance
 With CI/CD on BTP (via Cloud Transport Management or GitLab pipelines), you can automate static analysis and ATC scans for all ABAP Cloud or CAP services before transport. That ensures compliance to Clean Core rules at build time rather than after deployment.
 
-### 5. **Gradual Offloading Strategy**
+### 5. Gradual Offloading Strategy
 Use BTP to **depressurize the core incrementally**:
 
 - Start with low-risk modules like reporting, analytics, or workflow automation.  
