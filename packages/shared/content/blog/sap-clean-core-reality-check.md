@@ -11,11 +11,11 @@ tags:
   - enterprise-architecture
 ---
 
-When SAP describes **Clean Core**, it evokes a future: minimal kernel modifications, side-by-side extensions, and upgrades that “just work.” It’s the right direction. But in large brownfield environments, reality rarely cooperates. Having spent years architecting on SAP BTP, HANA, and connected systems rather than in the ERP kernel, I see Clean Core less as a code hygiene program and more as an **integration architecture challenge**. This is a reality check — and a pragmatic view of how to use BTP to make Clean Core achievable in practice.
+When SAP describes **Clean Core**, it evokes a future: minimal kernel modifications, side-by-side extensions, and upgrades that “just work.” It’s the right direction. But in large brownfield environments, reality rarely cooperates. Having spent years architecting on SAP BTP, HANA, and connected services, I see Clean Core less as a code hygiene program and more as an **integration architecture challenge**. This is a reality check — and a pragmatic view of how to use BTP to make Clean Core achievable in practice.
 
 ## My Lens: Experience First, Theory Second
 
-Before “Clean Core” was branded as a strategy, I already saw the same principle applied successfully: isolate the ERP core, externalize orchestration, and integrate via clear contracts. The core handles transactions; BTP and its services handle intelligence, coordination, and user interaction. That separation works — but only if the boundaries are explicit and governed.
+Before “Clean Core” was branded as a strategy, I already applied the same principle successfully as an architect: isolate the ERP core, externalize orchestration, and integrate via clear contracts. In early times RFCs, DIAG and Dynpro were the best choices. Now it is like this: The core handles transactions; BTP and its services handle intelligence, coordination, and user interaction. That separation works — but only if the boundaries are explicit and governed.
 
 When SAP introduced the **four extensibility levels (A–D)**, it formalized what many architects had been doing informally: treating the ERP core as a stable nucleus, with different degrees of permissible coupling around it. For someone coming from BTP architecture, this classification finally connects to real deployment design.
 
@@ -122,7 +122,7 @@ Below are concrete snapshots where I’ve architected SAP solutions and steered 
 - Context: Multi‑tenant BTP platform for factoring and treasury workflows. I owned the landscape: XSUAA roles/scopes, approuters, Spring services, and HANA Cloud schemas. Connectivity bridged to S/4HANA via destinations and principal propagation.
 - Clean Core stance: All workflow orchestration lived in CAP/Spring (Level A). S/4 exposure limited to released APIs and events for postings, business partners, and attachments (Level A/B). No kernel mods.
 - What made it hard: Legacy spreadsheets encoded eligibility rules. Business wanted “the same behavior.” We translated rules into explicit services and versioned contracts, then ran them in shadow mode before cutover.
-- What worked: API Management as the perimeter, ATC on ABAP Cloud stubs, and CTMS/GitLab pipelines enforcing evidence at every promotion. Upgrades became routine because the core surface area stayed small.
+- What worked: API Management as the perimeter and CTMS/GitLab pipelines enforcing evidence at every promotion. Upgrades became routine because the core surface area stayed small.
 - Result: We shipped without touching the kernel, passed independent pen tests, and kept auditors happy with deterministic runbooks and point‑in‑time recovery rehearsals.
 
 ### RFID Laundry at 60M Events/Week (Real)
