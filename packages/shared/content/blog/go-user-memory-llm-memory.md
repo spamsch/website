@@ -25,22 +25,20 @@ Most LLM products plateau once conversations span days or departments. Context w
 
 2. **Signal intelligence.** I designed LLM-driven extraction pipelines to capture loyalty signals, risk flags, and intent—stored as typed facts with provenance so downstream agents can reason over them.
 
-3. **Context optimisation loop.** I implemented alternative query generation, cosine re-ranking, and chunk window tuning to keep prompts slim while preserving relevance for GPT-4o/5-series models. The system tracks which query reformulations yield higher user engagement, then weights successful patterns more heavily in future retrievals.
+3. **Context optimisation loop.** I architected alternative query generation, cosine re-ranking, and chunk window tuning to keep prompts slim while preserving relevance for GPT-series models. The system tracks which query reformulations yield higher user engagement, then weights successful patterns more heavily in future retrievals.
 
 4. **Strategic memory layer.** Beyond storing facts, I built a reasoning pattern repository that captures which approaches solved similar problems before. When the assistant encounters a familiar task type, it retrieves not just data but proven strategies—reducing trial-and-error and improving consistency across sessions.
 
-5. **Workflow automation.** I built workers that ingest data, enforce quotas, batch embeddings, and sync spaces. Deploying to Cloudflare Workers kept latency low and costs transparent.
-
 ## Delivery in Practice
 
-- **Specification-first.** Every API, job, and handler I shipped came with type hints, formatting constraints, and pytest coverage so the team can scale safely.
+- **Specification-first.** Every API, job, and handler we shipped came with type hints, formatting constraints, and pytest coverage so the team can scale safely.
 - **90-day go-to-market plan.** I kept architecture, product milestones, and fundraising targets in a single roadmap that aligned founders, design partners, and investors.
 - **Competitive validation.** I benchmarked Supermemory, Mem0, and Zep to back my choices with research—not hype.
 
 ## Evolution at Runtime
 
-The system doesn't just recall—it learns. I implemented feedback loops that track retrieval effectiveness: when users accept suggestions, refine queries, or switch topics, those signals update retrieval weights and strategy rankings. Over weeks, the assistant discovers which memory types matter most for each user, which query expansions clarify ambiguity, and which reasoning chains close tasks faster. This test-time evolution means the product improves without retraining base models or waiting for the next deployment.
+The system doesn't just recall—it learns. I designed feedback loops that track retrieval effectiveness: when users accept suggestions, refine queries, or switch topics, those signals update retrieval weights and strategy rankings. Over weeks, the assistant discovers which memory types matter most for each user, which query expansions clarify ambiguity, and which reasoning chains close tasks faster. This test-time evolution means the product improves without retraining base models or waiting for the next deployment.
 
 ## Result
 
-LLM Memory isn't just a feature; it's the backbone that lets AI assistants stay coherent and get smarter over time. By combining rigorous retrieval science with adaptive strategy learning and pragmatic engineering, I built a memory fabric that evolves with usage—something enterprises can trust and startups can actually ship.
+LLM Memory isn't just a feature; it's the backbone that lets AI assistants stay coherent and get smarter over time. By combining rigorous retrieval science with adaptive strategy learning and pragmatic engineering, I architected a memory fabric that evolves with usage—something enterprises can trust and startups can actually ship.
