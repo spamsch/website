@@ -10,9 +10,9 @@ tags:
   - ai/ml
 ---
 
-Most LLM products plateau once conversations span days or departments. Context windows burst, graph stores drift, and costs spike. Worse, they never learn from their mistakes—each retrieval is static, each query answered the same way it was yesterday. This project set out to solve that by becoming an adaptive cognition layer that evolves with usage. I led the architecture, research, and implementation from zero to investor-ready.
+Most LLM products plateau once conversations span days or departments. Context windows burst, graph stores drift, and costs spike. Worse, they never learn from their mistakes—each retrieval is static, each query answered the same way it was yesterday. This project is one I did in my free time to explore this space.
 
-## What We Set Out to Build
+## What I Set Out to Build
 
 - **Persistent memory** that remembers decisions, sentiment, and commitments without drowning the model in tokens.
 - **Strategic adaptation** that learns which retrieval patterns succeed, which queries clarify intent, and which contexts drive better responses.
