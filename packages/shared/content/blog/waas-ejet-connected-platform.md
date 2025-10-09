@@ -3,7 +3,7 @@ title: "Engineering eJet: From Battery Packs to a Multi‑Tenant IoT Platform"
 description: "How I turned an electric surfboard concept into a certified, connected product with a cloud‑native platform—hardware, firmware, data, and operations moving in lockstep."
 draft: false
 external: false
-date: 2025-02-01
+date: 2025-09-01
 order: 4
 tags:
   - project

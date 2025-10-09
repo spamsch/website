@@ -3,7 +3,7 @@ title: "Designing a RFID Laundry Platform for 60 Million Weekly Scans"
 description: "How I engineered a SAP BTP architecture that ingests 60 million RFID events per week while staying fast, governable, and ready for SaaS expansion."
 draft: false
 external: false
-date: 2024-03-05
+date: 2023-11-05
 order: 6
 tags:
   - project
