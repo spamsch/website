@@ -117,10 +117,11 @@ The workflow defines clear separation of responsibilities between human develope
 
 ## Human Developer
 
-- Defines and owns the task (`sessions/tasks/<id>.md`), scope, and acceptance criteria.  
-- Initiates structured sessions through **cc-sessions**.  
-- Provides the explicit onboarding context to the LLMs (no implicit assumptions).  
-- Reviews AI output and integrates validated results into feature branches.  
+- Defines and owns the task scope and acceptance criteria using **cc-sessions task creation protocol** (`mek:` trigger phrase).
+- Never manually creates task files — always uses cc-sessions to ensure proper structure and frontmatter.
+- Initiates structured sessions through **cc-sessions** (`start^:`, `yert`, `finito`).
+- Provides the explicit onboarding context to the LLMs (no implicit assumptions).
+- Reviews AI output and integrates validated results into feature branches.
 - Maintains test discipline — each functional increment must be validated by a unit test checkpoint.
 
 ## Claude — Code Generation and Implementation Engine
@@ -209,13 +210,20 @@ This file is the single source of truth for the task scope and serves as the onb
 
 **Creating a new task:**
 
-You can create task files manually or use the cc-sessions trigger phrase:
+Always use the cc-sessions task creation protocol via the `mek:` trigger phrase:
 
 ```
 mek: Add /api/status endpoint for monitoring
 ```
 
-This interactively prompts for task details and generates a properly formatted task file with frontmatter.
+This initiates the task creation workflow where Claude:
+1. Interactively prompts for task details (context, scope, acceptance criteria)
+2. Generates a properly formatted task file with frontmatter in `sessions/tasks/`
+3. Automatically creates the associated git branch
+4. Establishes context manifests through codebase analysis
+5. Ensures task persistence across sessions
+
+**Never manually create task files.** The cc-sessions protocol ensures correct structure, frontmatter, and integration with the workflow automation system.
 
 **Example task file:**
 
@@ -461,15 +469,16 @@ Understanding when to use each tool is critical to an efficient workflow. Claude
 **Task:** Add a new user profile field to store timezone preference.
 
 **Workflow:**
-1. Developer creates `sessions/tasks/2025-10-22-add-timezone-field.md` with frontmatter
-2. Developer uses cc-sessions: `start^: sessions/tasks/2025-10-22-add-timezone-field.md`
-3. **Claude generates:**
+1. Developer uses cc-sessions to create task: `mek: Add timezone field to user profile`
+2. Claude interactively prompts for details and generates `sessions/tasks/2025-10-22-add-timezone-field.md`
+3. Developer starts implementation: `start^: sessions/tasks/2025-10-22-add-timezone-field.md`
+4. **Claude generates:**
    - Database migration
    - Model updates
    - API endpoint changes
    - Unit tests
-4. Developer reviews, commits, and pushes
-5. **No Codex consultation needed** — straightforward implementation with clear requirements
+5. Developer reviews, commits, and pushes
+6. **No Codex consultation needed** — straightforward implementation with clear requirements
 
 **Why Claude only?**
 The task is well-defined with no architectural ambiguity. Claude can generate the complete solution without needing a second opinion.
@@ -481,15 +490,17 @@ The task is well-defined with no architectural ambiguity. Claude can generate th
 **Task:** Implement real-time notifications for user activity.
 
 **Workflow:**
-1. Developer creates task file but is uncertain about the best approach (WebSockets vs. Server-Sent Events vs. polling)
-2. Developer asks Claude: "Before implementing, consult Codex on the best approach for real-time notifications given our current FastAPI + React stack"
-3. **Claude → Codex (via MCP):**
+1. Developer creates task: `mek: Implement real-time notifications for user activity`
+2. Claude prompts for details; developer notes uncertainty about approach (WebSockets vs. Server-Sent Events vs. polling)
+3. Developer starts task: `start^: sessions/tasks/2025-10-22-realtime-notifications.md`
+4. Developer asks Claude: "Before implementing, consult Codex on the best approach for real-time notifications given our current FastAPI + React stack"
+5. **Claude → Codex (via MCP):**
    ```
    CONTEXT: FastAPI backend, React frontend, Nginx reverse proxy, 5000 concurrent users expected
    QUESTION: WebSockets vs SSE vs long-polling for user activity notifications?
    CONSTRAINTS: Must work behind Nginx, minimal infrastructure changes
    ```
-4. **Codex responds:**
+6. **Codex responds:**
    ```
    ✅ Recommend Server-Sent Events (SSE)
    REASONING:
@@ -501,8 +512,8 @@ The task is well-defined with no architectural ambiguity. Claude can generate th
    ⚠️ WebSockets would require additional Nginx configuration
    ❌ Long-polling creates unnecessary load at 5000 users
    ```
-5. **Claude implements SSE solution** based on Codex's recommendation
-6. Developer commits the Claude-generated implementation
+7. **Claude implements SSE solution** based on Codex's recommendation
+8. Developer commits the Claude-generated implementation
 
 **Why involve Codex?**
 The task has multiple valid approaches with different trade-offs. Codex provides architectural analysis before Claude generates code, preventing costly rewrites.
@@ -514,16 +525,17 @@ The task has multiple valid approaches with different trade-offs. Codex provides
 **Task:** Refactor authentication middleware to support multiple token types.
 
 **Workflow:**
-1. Developer asks Claude: "Refactor the auth middleware to support both JWT and API key authentication"
-2. **Claude generates** the refactored middleware code
-3. Developer reviews and notices increased complexity
-4. Developer asks Claude: "Get Codex's opinion on whether this refactoring maintains good separation of concerns"
-5. **Claude → Codex:**
+1. Developer creates task: `mek: Refactor auth middleware to support JWT and API key authentication`
+2. Developer starts task: `start^: sessions/tasks/2025-10-22-refactor-auth-middleware.md`
+3. **Claude generates** the refactored middleware code
+4. Developer reviews and notices increased complexity
+5. Developer asks Claude: "Get Codex's opinion on whether this refactoring maintains good separation of concerns"
+6. **Claude → Codex:**
    ```
    CONTEXT: Refactored auth middleware (see attached code)
    QUESTION: Does this maintain clean separation of concerns? Any architectural red flags?
    ```
-6. **Codex responds:**
+7. **Codex responds:**
    ```
    ⚠️ CONCERNS:
    - Single middleware handles two different auth strategies (violates SRP)
@@ -534,9 +546,9 @@ The task has multiple valid approaches with different trade-offs. Codex provides
    - Create shared base class: BaseAuthMiddleware
    - Use strategy pattern for token validation
    ```
-7. Developer asks Claude: "Implement Codex's suggested strategy pattern approach"
-8. **Claude regenerates** the improved implementation
-9. Developer commits the final version
+8. Developer asks Claude: "Implement Codex's suggested strategy pattern approach"
+9. **Claude regenerates** the improved implementation
+10. Developer commits the final version
 
 **Why both tools?**
 Claude generates the initial refactoring quickly, but Codex provides critical architectural review that catches design issues before they're committed.
@@ -548,13 +560,15 @@ Claude generates the initial refactoring quickly, but Codex provides critical ar
 **Task:** Fix a bug where user emails aren't being validated properly.
 
 **Workflow:**
-1. Developer uses: `start^: sessions/tasks/2025-10-22-email-validation-bug.md`
-2. **Claude:**
+1. Developer creates task: `mek: Fix email validation bug`
+2. Claude prompts for bug details (steps to reproduce, expected vs actual behavior)
+3. Developer starts task: `start^: sessions/tasks/2025-10-22-email-validation-bug.md`
+4. **Claude:**
    - Reads the bug report
    - Analyzes the existing validation code
    - Generates the fix with updated regex and tests
-3. Developer commits immediately
-4. **No Codex consultation** — bug fixes rarely need architectural review
+5. Developer commits immediately
+6. **No Codex consultation** — bug fixes rarely need architectural review
 
 **Why Claude only?**
 Bug fixes are tactical corrections with clear correctness criteria. Codex's strategic review adds no value here.
