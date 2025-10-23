@@ -247,14 +247,14 @@ Our monitoring tools require a lightweight backend endpoint that returns the cur
 ## Scope
 Implement a new GET endpoint `/api/status` in the FastAPI backend.
 It should return:
-```json
+
 { "status": "ok", "db_connected": true, "version": "1.2.5" }
-```
 
 ## Acceptance Criteria
 - Returns HTTP 200 and JSON payload as above
 - Unit test covers positive and simulated DB-down scenarios
 - Endpoint included in OpenAPI schema
+```
 
 ## 2. Onboarding the LLM
 
@@ -337,13 +337,17 @@ If the developer wants architectural validation **before** committing, they can 
 **Claude → Codex (via MCP)**
 
 CONTEXT: Proposed /api/status endpoint implementation.
+
 CODE: [generated status.py above]
+
 QUESTION: Does this design align with standard health check patterns? Any architectural concerns?
 
 **Codex Response → Claude**
 
 ✅ Design is sound.
+
 ⚠️ Consider adding response time measurement for the DB check.
+
 💡 Suggest wrapping DB call in try/except to return db_connected: false rather than error on failure.
 
 **Claude → Developer**
@@ -573,8 +577,6 @@ Claude generates the initial refactoring quickly, but Codex provides critical ar
 **Why Claude only?**
 Bug fixes are tactical corrections with clear correctness criteria. Codex's strategic review adds no value here.
 
----
-
 ## Decision Matrix
 
 | Situation | Use Claude | Consult Codex |
@@ -604,6 +606,7 @@ claude mcp add --transport stdio -s user codex -- codex -m gpt-5-codex -c model_
 ```
 
 What it does
+
 	•	claude mcp add — registers an MCP server for Claude Desktop.
 	•	--transport stdio — launches the server over STDIN/STDOUT; required for local processes.
 	•	-s user — stores the config in the user-scoped settings (not workspace-only).
@@ -615,6 +618,7 @@ What it does
 	•	mcp-server — subcommand telling the binary to run in MCP mode.
 
 Result
+
 	•	Claude exposes tools from the codex MCP server.
 	•	Calls from Claude to Codex travel via MCP with deterministic stdio transport.
 
@@ -646,18 +650,19 @@ Config fragment
 ```
 
 What it does
+
 	•	Attaches a Stop hook to Claude Code’s run lifecycle.
 	•	On completion, executes the command to trigger a system notification (and optional voice output depending on the notifier).
 	•	deno run --allow-run jsr:@wyattjoh/claude-code-notification — runs the notifier script via Deno; --allow-run permits spawning platform-specific notifiers.
 
 Placement
+
 	•	Insert into the Claude Code configuration file (project or user scope), under the root-level hooks key.
 	•	Ensure deno is installed and jsr:@wyattjoh/claude-code-notification is resolvable.
 
 Verification
-	•	Trigger any Claude Code run (e.g., format, review). On completion, an OS notification (and, if configured, voice feedback) fires.
 
-⸻
+	•	Trigger any Claude Code run (e.g., format, review). On completion, an OS notification (and, if configured, voice feedback) fires.
 
 3) Notes for deterministic operation
 	•	Pin model IDs (-m gpt-5-codex) and reasoning configs (model_reasoning_effort=medium) to avoid drift.

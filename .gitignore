@@ -30,3 +30,4 @@ Thumbs.db
 .vscode/
 
 tmp/
+.claude/
