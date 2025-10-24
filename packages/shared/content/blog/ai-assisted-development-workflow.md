@@ -7,9 +7,8 @@ date: 2025-10-24
 order: 2
 tags:
   - musing
+  - opinion
   - ai/ml
-  - development-workflow
-  - engineering-practices
 ---
 
 After months of integrating AI tools into production development workflows, I've learned that effective AI-assisted development looks nothing like the hype. This is a reality check on what actually works—and what produces maintainable, high-quality code.
