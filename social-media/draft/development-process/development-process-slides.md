@@ -101,6 +101,8 @@ Some voices claim AI will replace developers:
 - Provide clear scope, acceptance criteria, and tests to steer outputs
 - Developers who wield AI remain essential — and multiply their leverage
 
+## OpenAI cofounder Andrej Karpathy says it will take a decade before AI agents actually work
+
 ---
 
 # Stay calm: Fundamentals have not changed
@@ -300,6 +302,117 @@ section {
 - `start^:` — Load task and begin
 - `yert` — Implement approved todos
 - `finito` — Complete and merge
+
+---
+
+# Next Tools: Frontend Focus
+## Playwright (E2E) and Storybook (UI docs + interaction tests)
+
+---
+
+## Why These Tools Fit This Workflow
+
+- Capture UI behavior as executable specs (stories and tests)
+- Tight feedback loop for AI‑generated UI code
+- Deterministic verification in CI for PR gates
+- Incremental footprint; complements Claude + Codex + GitHub
+
+---
+
+## Playwright — End‑to‑End and Component Testing
+
+- Cross‑browser automation: Chromium, WebKit, Firefox (headless or headed)
+- Parallel tests, auto‑waits, network mocking, fixtures
+- Tracing, screenshots, and video for debuggability
+- Supports component testing for modern frameworks and full E2E via app URLs
+
+```ts
+// tests/todo.spec.ts
+import { test, expect } from '@playwright/test'
+
+test('add todo', async ({ page }) => {
+  await page.goto('http://localhost:3000')
+  await page.getByPlaceholder('Add a task').fill('Buy milk')
+  await page.getByRole('button', { name: 'Add' }).click()
+  await expect(page.getByText('Buy milk')).toBeVisible()
+})
+```
+
+---
+
+## Playwright in an AI‑Assisted Flow
+
+- Provide acceptance criteria and target selectors; ask AI to draft tests
+- Prefer robust queries: `getByRole`, `getByLabelText`, `getByPlaceholder`
+- Use `npx playwright codegen` to capture flows; have AI refactor to fixtures
+- Keep E2E for critical paths; push most states to component tests
+- CI: run Playwright on PRs; upload trace for failures
+
+```sh
+npm i -D @playwright/test
+npx playwright install
+npx playwright test
+```
+
+---
+
+## Storybook — Isolated UI Development
+
+- Build components in isolation; document states via stories
+- Live docs and controls; accessibility checks via addon‑a11y
+- Encode behavior with story `play` functions (Interaction Testing)
+- Run interactions headlessly in CI via `@storybook/test-runner`
+
+```ts
+// Button.stories.ts
+import { within, userEvent, expect } from '@storybook/test'
+
+export const Filled = {
+  args: { label: 'Save', disabled: false },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('button', { name: /save/i }))
+    await expect(canvas.getByText(/saved/i)).toBeVisible()
+  }
+}
+```
+
+---
+
+## Storybook in an AI‑Assisted Flow
+
+- Ask AI to scaffold stories for every meaningful state and edge case
+- Use `play` to turn acceptance criteria into executable interactions
+- Reuse accessible queries via `@storybook/testing-library`
+- Stories become the canonical spec AI reads and updates
+
+---
+
+## Storybook + Playwright Together
+
+- Storybook Test Runner (built on Playwright) runs all `play` interactions in CI
+- Optional visual checks: Playwright `toHaveScreenshot` or hosted visual review
+- Strategy: stories cover states; Playwright E2E covers cross‑page flows
+- Deterministic tests: mock APIs in stories; stub network in E2E where needed
+
+---
+
+## Minimal Setup (Frontend)
+
+- Playwright: `npm i -D @playwright/test && npx playwright install`
+- Storybook: `npx storybook@latest init` (framework specific)
+- Add CI steps: build app, run Storybook tests, then Playwright E2E
+- Save traces/screenshots as artifacts for quick AI‑assisted debugging
+
+---
+
+## Example Prompts for AI
+
+**Playwright**
+- “Given these acceptance criteria and routes, generate Playwright tests using `getByRole` selectors, add a fixture for logged‑in state, and mock the `GET /api/todos` response.”
+
+**Storybook**
+- “Create stories for `Button` covering default, loading, disabled, and destructive variants. Add a `play` function that clicks the button and asserts the `onClick` handler fired. Include basic a11y checks.”
 
 ---
 
