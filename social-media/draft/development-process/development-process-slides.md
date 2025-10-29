@@ -9,6 +9,107 @@ paginate: true
 
 ---
 
+# Excursion: Github Universe 2025
+## Github is the home for all developers and just announced Agent HQ which is proposed as the future of software development
+
+---
+
+## Agent HQ: The Future of Software Development?
+
+**Any agent, any way you work — native to GitHub.**
+
+- Unified, open ecosystem to orchestrate any agent, any time, anywhere
+- Mission control to assign, steer, and track multiple agents
+- Deep integrations: VS Code planning/customization, Copilot CLI, Copilot integrations
+- Enterprise guardrails: agentic code review, AI control plane, usage metrics
+- Works with your primitives: Git, pull requests, issues, Actions/self‑hosted runners
+- 3rd‑party coding agents (Anthropic, OpenAI, Google, Cognition, xAI, more) within paid Copilot
+
+---
+
+## Who Agent HQ Is For
+
+This is for very experienced developers who already run an AI‑assisted coding workflow — not beginners.
+
+- Strong Git/PR/test discipline and governance in place
+- Comfortable orchestrating multiple agents and supervising outcomes
+- Skilled at prompt design and decomposing work into verifiable steps
+- Brings existing toolchain: GitHub + Copilot + VS Code (+ Actions/runners)
+- Goal is shipping faster with confidence — not “AI does everything”
+
+---
+
+# Excursion: Agent Landscape
+## There are so many options to chose from that it feels like one is behind the curve and thus slower and less efficient
+
+---
+
+## The Agent Landscape (Beyond Claude/Codex/Copilot)
+
+There are many high-quality coding assistants and tools:
+
+<style scoped>
+ul.two-col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem 2rem;
+  padding-left: 1.1em; /* keep bullets aligned */
+}
+ul.two-col li { margin: 0.1rem 0; }
+</style>
+
+<ul class="two-col">
+  <li>Amazon Q Developer</li>
+  <li>Google Gemini Code Assist</li>
+  <li>Sourcegraph Cody</li>
+  <li>Codeium</li>
+  <li>Windsurf (AI IDE)</li>
+  <li>Tabnine</li>
+  <li>Cursor IDE</li>
+  <li>JetBrains AI Assistant</li>
+  <li>Replit AI (Ghostwriter)</li>
+  <li>Continue (VS Code/JetBrains)</li>
+  <li>Aider (CLI pair programmer)</li>
+  <li>CodeRabbit (PR/code review)</li>
+  <li>Cognition Devin</li>
+  <li>OpenDevin (open source)</li>
+  <li>Code Llama/Phind toolchains</li>
+  <li>Lightning AI Studio/Truss agents</li>
+</ul>
+
+---
+
+# Excursion: Developers & AI
+## The job isn’t vanishing — it’s evolving toward orchestration, verification, and impact.
+
+---
+
+## The Doom Narrative
+
+Some voices claim AI will replace developers:
+
+- Headlines focus on demos, not production constraints
+- Replacement myths ignore governance, security, and accountability
+- Tooling shifts tasks, but ownership of outcomes remains human
+
+---
+
+## Reality Check: Still Software Engineering
+
+- Even top engineers fight bugs, bad specs, and flaky infrastructure
+- Treat AI like a senior teammate: fast and knowledgeable, but needs onboarding
+- Provide clear scope, acceptance criteria, and tests to steer outputs
+- Developers who wield AI remain essential — and multiply their leverage
+
+---
+
+# Stay calm: Fundamentals have not changed
+## An LLM does not inherently know the semantics or standards or edge cases. It still needs specifications, guardrails and tests to measure progress and success.
+
+### This workflow shows you how to be successful using AI assistant
+
+---
+
 ## Setting Realistic Expectations
 
 This workflow will **not** produce dramatic speed gains promoted in AI development hype.
