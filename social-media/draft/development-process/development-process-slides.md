@@ -305,6 +305,32 @@ section {
 
 ---
 
+# Sensible Parallelism
+## Where multiple agents actually help
+
+- Research/PoCs: spike alternatives, wire new libs, answer “can this work?”
+- System understanding: trace codepaths, map data flow, spot docs gaps
+- Small maintenance: eliminate deprecation warnings, fix lints, unflake tests
+- Pre-specified tasks: well-scoped changes with clear acceptance criteria
+- Async/off-CPU: long-running research in cloud while you review locally
+
+Note: Land one significant change at a time; keep the rest staged.
+
+---
+
+## Running Parallel Agents Safely
+
+- Isolate work: separate branches/worktrees or temp checkouts; prefer containers
+- Guardrails: approvals for prod repos; YOLO only for low-risk sandboxes
+- Clear specs per agent: precise goals, exit criteria, and artifacts to return
+- Review discipline: serialize reviews; merge only after verification/tests
+- Context hygiene: kill runs that drift; stash agent notes for future prompts
+- Tools that fit: Claude Code, Codex CLI/Cloud, Copilot Agent, Google Jules
+
+Inspired by Simon Willison’s “Embracing the parallel coding agent lifestyle.”
+
+---
+
 # Next Tools: Frontend Focus
 ## Playwright (E2E) and Storybook (UI docs + interaction tests)
 
