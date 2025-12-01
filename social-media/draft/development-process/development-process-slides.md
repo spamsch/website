@@ -7,6 +7,10 @@ paginate: true
 # AI-Assisted Development Workflow
 ## A Structured Approach to Software Engineering with Claude and Codex
 
+_Simon Pamies_
+PS Cooperation
+Monday 3rd November
+
 ---
 
 # Excursion: Github Universe 2025
@@ -33,9 +37,7 @@ This is for very experienced developers who already run an AI‑assisted coding 
 
 - Strong Git/PR/test discipline and governance in place
 - Comfortable orchestrating multiple agents and supervising outcomes
-- Skilled at prompt design and decomposing work into verifiable steps
 - Brings existing toolchain: GitHub + Copilot + VS Code (+ Actions/runners)
-- Goal is shipping faster with confidence — not “AI does everything”
 
 ---
 
@@ -195,31 +197,6 @@ This workflow will **not** produce dramatic speed gains promoted in AI developme
 
 ---
 
-<style scoped>
-section {
-   font-size: 22px;
-}
-</style>
-
-## Why Not Code Rabbit, AutoGen, Cursor, or Windsurf?
-
-**Minimal tool footprint reduces complexity:**
-- Each additional tool = more subscriptions, maintenance, security reviews, and training
-- More tools = more context switching and cognitive overhead
-- Tool sprawl creates vendor lock-in and increases attack surface
-
-**Tools don't solve planning problems:**
-- Code Rabbit won't fix vague requirements
-- AutoGen won't compensate for poor architecture decisions
-- Cursor won't eliminate the need for human review
-- **Garbage in, garbage out** — tools amplify your process, good or bad
-
-**Three tools are sufficient:**
-- Claude + Codex + GitHub provide complete coverage
-- Adding more tools optimizes for hype, not results
-
----
-
 ## Key Roles Overview
 
 **Human Developer**
@@ -305,8 +282,145 @@ section {
 
 ---
 
+## CLAUDE.md — The Agent Constitution
+
+**Your repository's single most important file for Claude Code.**
+
+**Core Principles:**
+- Start with guardrails, not comprehensive docs
+- Document what Claude gets wrong, not everything
+- Keep it compact: force better tooling, not longer docs
+- Never block without alternatives: "Never X, prefer Y"
+- Point to detailed docs; don't embed them (bloats context)
+
+---
+
+**Structure:**
+```md
+# Monorepo
+## Python
+- Always use pytest with ...
+- Test with: <command>
+## <Internal Tool>
+- Usage: <example>
+- For <complex case> see path/to/docs.md
+```
+
+**Result:** A high-level, curated set of guardrails that guides where to invest in AI-friendly tools.
+
+---
+
+## Context Hygiene — /context and /clear
+
+**Monitor Your Context Window:**
+- 200k token budget; run `/context` mid-session
+- Baseline cost: ~20k tokens for repo structure/CLAUDE.md
+- Remaining ~180k fills quickly with implementation work
+
+---
+
+**Three Reboot Workflows:**
+
+| Strategy | When to Use | Steps |
+|----------|-------------|-------|
+| `/compact` | ❌ Avoid | Opaque, error-prone auto-compaction |
+| `/clear` + `/catchup` | ✅ Simple restart | Clear state → read changed files in branch |
+| "Document & Clear" | ✅ Complex tasks | Dump plan to .md → /clear → read .md, continue |
+
+**Takeaway:** Don't trust auto-compaction. Use /clear for simple reboots and "Document & Clear" to create durable external memory for complex tasks.
+
+---
+
+## Skills — The Right Abstraction
+
+**Evolution of Agent Autonomy:**
+1. **Single Prompt** — All context in one massive prompt (brittle, doesn't scale)
+2. **Tool Calling** — Hand-craft tools, abstract reality for agent (better, but creates bottlenecks)
+3. **Scripting** — Give agent raw environment access; it writes code on-the-fly
+
+---
+
+**Skills = Productization of the Scripting Layer**
+
+- Formal way to document CLIs and scripts for agent discovery
+- More flexible than MCP's rigid API model
+- SKILL.md provides organized, shareable documentation
+- Agent gets raw power; you control the entry points
+
+**If you've been favoring CLIs over MCP, you've been getting Skills benefits all along.**
+
+---
+
+## Example: Database Migration Skill
+
+**SKILL.md in `.claude/skills/db-migrate/`**
+```md
+# Database Migration Helper
+
+## What this does
+Manages database schema migrations safely across environments.
+
+## When to use
+- Creating new tables or columns
+- Modifying existing schema
+- Rolling back failed migrations
+
+## Available commands
+./scripts/db migrate create <name>    # Create new migration
+./scripts/db migrate up               # Apply pending migrations
+./scripts/db migrate down             # Rollback last migration
+./scripts/db migrate status           # Show migration state
+```
+
+---
+
+...
+
+```md
+## Important rules
+- Always run in transaction mode (default)
+- Never modify existing migrations
+- Test on dev environment first
+- Include both up and down migrations
+
+## Example workflow
+1. Create: ./scripts/db migrate create add_users_table
+2. Edit generated file in migrations/
+3. Apply: ./scripts/db migrate up
+4. Verify: ./scripts/db migrate status
+```
+
+---
+
+## Why Not Code Rabbit, AutoGen, Cursor, or Windsurf?
+
+**Minimal tool footprint reduces complexity:**
+- Each additional tool = more subscriptions, maintenance, security reviews, and training
+- More tools = more context switching and cognitive overhead
+- Tool sprawl creates vendor lock-in and increases attack surface
+
+---
+
+**Tools don't solve planning problems:**
+- Code Rabbit won't fix vague requirements
+- AutoGen won't compensate for poor architecture decisions
+- Cursor won't eliminate the need for human review
+- **Garbage in, garbage out** — tools amplify your process, good or bad
+
+**Three tools are sufficient:**
+- Claude + Codex + GitHub provide complete coverage
+- Adding more tools optimizes for hype, not results
+
+---
+
+# Demo Time
+
+---
+
 # Sensible Parallelism
 ## Where multiple agents actually help
+
+---
 
 - Research/PoCs: spike alternatives, wire new libs, answer “can this work?”
 - System understanding: trace codepaths, map data flow, spot docs gaps
