@@ -89,49 +89,45 @@ function tagClass(tag: string): string {
 </PageLayout>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const buttons = document.querySelectorAll<HTMLButtonElement>(".tag-filter-btn");
-    const items = document.querySelectorAll<HTMLLIElement>(".blog-list-item");
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".tag-filter-btn");
+  const items = document.querySelectorAll<HTMLLIElement>(".blog-list-item");
 
-    function applyFilter(tag: string) {
-      buttons.forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.tag === tag);
-      });
-      items.forEach((item) => {
-        if (!tag) {
-          item.style.display = "";
-          return;
-        }
-        const itemTags = (item.dataset.tags ?? "").split(",");
-        item.style.display = itemTags.includes(tag) ? "" : "none";
-      });
-    }
-
-    // Restore filter from URL
-    const params = new URLSearchParams(window.location.search);
-    const initialTag = params.get("tag") ?? "";
-    applyFilter(initialTag);
-
+  function applyFilter(tag: string) {
     buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const tag = btn.dataset.tag ?? "";
-        const currentTag = new URLSearchParams(window.location.search).get("tag") ?? "";
+      btn.classList.toggle("active", btn.dataset.tag === tag);
+    });
+    items.forEach((item) => {
+      if (!tag) {
+        item.style.display = "";
+        return;
+      }
+      const itemTags = (item.dataset.tags ?? "").split(",");
+      item.style.display = itemTags.includes(tag) ? "" : "none";
+    });
+  }
 
-        // Toggle off if clicking the already-active tag
-        const newTag = tag === currentTag ? "" : tag;
+  // Restore filter from URL
+  const params = new URLSearchParams(window.location.search);
+  const initialTag = params.get("tag") ?? "";
+  applyFilter(initialTag);
 
-        if (newTag) {
-          const url = new URL(window.location.href);
-          url.searchParams.set("tag", newTag);
-          history.pushState({}, "", url);
-        } else {
-          const url = new URL(window.location.href);
-          url.searchParams.delete("tag");
-          history.pushState({}, "", url);
-        }
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tag = btn.dataset.tag ?? "";
+      const currentTag = new URLSearchParams(window.location.search).get("tag") ?? "";
 
-        applyFilter(newTag);
-      });
+      // Toggle off if clicking the already-active tag
+      const newTag = tag === currentTag ? "" : tag;
+
+      const url = new URL(window.location.href);
+      if (newTag) {
+        url.searchParams.set("tag", newTag);
+      } else {
+        url.searchParams.delete("tag");
+      }
+      history.pushState({}, "", url);
+
+      applyFilter(newTag);
     });
   });
 </script>
