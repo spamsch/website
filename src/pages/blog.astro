@@ -13,6 +13,12 @@ const posts = await readAll({
 const sortedPosts = posts
   .filter((p) => p.frontmatter.draft !== true)
   .sort((a, b) => a.frontmatter.order - b.frontmatter.order);
+
+const allTags = [...new Set(sortedPosts.flatMap((p) => p.frontmatter.tags ?? []))].sort();
+
+function tagClass(tag: string): string {
+  return "tag-" + tag.replace(/\//g, "-").toLowerCase();
+}
 ---
 
 <PageLayout>
@@ -25,11 +31,20 @@ const sortedPosts = posts
         learned, detailed architecture notes, and the occasional musing about where tech is headed next.
       </p>
     </div>
+    <div class="tag-filter-bar mb-6">
+      <button class="tag-pill tag-filter-btn active" data-tag="">All</button>
+      {allTags.map((tag) => (
+        <button class={`tag-pill tag-filter-btn ${tagClass(tag)}`} data-tag={tag}>
+          {tag}
+        </button>
+      ))}
+    </div>
     <ul class="blog-list">
       {
         sortedPosts.map((post) => {
+          const tags = post.frontmatter.tags ?? [];
           return (
-            <li class="mb-6 blog-list-item">
+            <li class="mb-6 blog-list-item" data-tags={tags.join(",")}>
               <div class="title blog-list-title">
                 {post.frontmatter.external ? (
                   <a
@@ -51,10 +66,13 @@ const sortedPosts = posts
                   </a>
                 )}
               </div>
-              {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
+              {tags.length > 0 && (
                 <div class="blog-tags-line mt-2">
-                  <span>Tags:</span>
-                  <span>{post.frontmatter.tags.join(", ")}</span>
+                  {tags.map((tag) => (
+                    <span class={`tag-pill ${tagClass(tag)}`} style="padding: 0.1rem 0.5rem; border-radius: 9999px; border-width: 1px; font-size: 0.65rem;">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               )}
               {post.frontmatter.description && (
@@ -69,3 +87,70 @@ const sortedPosts = posts
     </ul>
   </section>
 </PageLayout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".tag-filter-btn");
+    const items = document.querySelectorAll<HTMLLIElement>(".blog-list-item");
+
+    function applyFilter(tag: string) {
+      buttons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.tag === tag);
+      });
+      items.forEach((item) => {
+        if (!tag) {
+          item.style.display = "";
+          return;
+        }
+        const itemTags = (item.dataset.tags ?? "").split(",");
+        item.style.display = itemTags.includes(tag) ? "" : "none";
+      });
+    }
+
+    // Restore filter from URL
+    const params = new URLSearchParams(window.location.search);
+    const initialTag = params.get("tag") ?? "";
+    applyFilter(initialTag);
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tag = btn.dataset.tag ?? "";
+        const currentTag = new URLSearchParams(window.location.search).get("tag") ?? "";
+
+        // Toggle off if clicking the already-active tag
+        const newTag = tag === currentTag ? "" : tag;
+
+        if (newTag) {
+          const url = new URL(window.location.href);
+          url.searchParams.set("tag", newTag);
+          history.pushState({}, "", url);
+        } else {
+          const url = new URL(window.location.href);
+          url.searchParams.delete("tag");
+          history.pushState({}, "", url);
+        }
+
+        applyFilter(newTag);
+      });
+    });
+  });
+</script>
+
+<style>
+  .tag-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag-filter-btn {
+    padding: 0.2rem 0.7rem;
+    border-radius: 9999px;
+    border-width: 1px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.15s ease;
+  }
+</style>
