@@ -198,6 +198,7 @@
         background-color: rgb(var(--color-primary-main) / 0.08);
         border-color: rgb(var(--color-primary-main) / 0.35);
         color: rgb(var(--color-primary-main));
+        cursor: pointer;
     }
 
     .theme-sleek.dark .tag-pill {
@@ -252,6 +253,66 @@
     .theme-sleek.dark .tag-pill.tag-opinion {
         background-color: hsl(var(--tag-hue) / 0.3);
         border-color: hsl(var(--tag-hue) / 0.55);
+    }
+
+    .tag-pill.tag-ai-ml {
+        --tag-hue: 200 80% 50%;
+        background-color: hsl(var(--tag-hue) / 0.15);
+        border-color: hsl(var(--tag-hue) / 0.45);
+        color: hsl(var(--tag-hue));
+    }
+
+    .theme-sleek.dark .tag-pill.tag-ai-ml {
+        background-color: hsl(var(--tag-hue) / 0.3);
+        border-color: hsl(var(--tag-hue) / 0.55);
+    }
+
+    .tag-pill.tag-rag {
+        --tag-hue: 270 60% 58%;
+        background-color: hsl(var(--tag-hue) / 0.15);
+        border-color: hsl(var(--tag-hue) / 0.45);
+        color: hsl(var(--tag-hue));
+    }
+
+    .theme-sleek.dark .tag-pill.tag-rag {
+        background-color: hsl(var(--tag-hue) / 0.3);
+        border-color: hsl(var(--tag-hue) / 0.55);
+    }
+
+    .tag-pill.tag-enterprise-architecture {
+        --tag-hue: 160 50% 45%;
+        background-color: hsl(var(--tag-hue) / 0.15);
+        border-color: hsl(var(--tag-hue) / 0.45);
+        color: hsl(var(--tag-hue));
+    }
+
+    .theme-sleek.dark .tag-pill.tag-enterprise-architecture {
+        background-color: hsl(var(--tag-hue) / 0.3);
+        border-color: hsl(var(--tag-hue) / 0.55);
+    }
+
+    .tag-pill.tag-sap {
+        --tag-hue: 210 60% 52%;
+        background-color: hsl(var(--tag-hue) / 0.15);
+        border-color: hsl(var(--tag-hue) / 0.45);
+        color: hsl(var(--tag-hue));
+    }
+
+    .theme-sleek.dark .tag-pill.tag-sap {
+        background-color: hsl(var(--tag-hue) / 0.3);
+        border-color: hsl(var(--tag-hue) / 0.55);
+    }
+
+    .tag-pill.active {
+        background-color: hsl(var(--tag-hue, 30 90% 50%) / 0.85);
+        border-color: hsl(var(--tag-hue, 30 90% 50%));
+        color: #fff;
+    }
+
+    .theme-sleek.dark .tag-pill.active {
+        background-color: hsl(var(--tag-hue, 30 90% 50%) / 0.85);
+        border-color: hsl(var(--tag-hue, 30 90% 50%));
+        color: #fff;
     }
 
     .blog-tags-line {
