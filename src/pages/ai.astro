@@ -1,0 +1,63 @@
+---
+import PageMeta from "../components/PageMeta.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+import { SITE_TITLE } from "../config";
+---
+
+<PageLayout>
+  <PageMeta title={`AI | ${SITE_TITLE}`} slot="meta" />
+  <Fragment slot="main">
+    <section class="mb-8">
+      <h1 class="font-extrabold text-5xl md:text-6xl tracking-tight pt-4 pb-8 overflow-hidden">
+        <span class="bg-gradient-to-br from-[#fb923c] via-[#f97316] to-[#ea580c] dark:from-primary-main dark:via-primary-main dark:to-primary-main bg-clip-text text-transparent">
+          AI
+        </span>
+      </h1>
+
+      <div class="space-y-6 prose max-w-none prose-sleek">
+        <p>
+          This page describes how I use artificial intelligence on this site and in my work.
+        </p>
+
+        <div>
+          <h2 class="text-xl font-semibold mb-3 text-text-bold">Content authorship</h2>
+          <p>
+            All articles, blog posts, and opinions on this site are written by me, Simon Pamies.
+            The ideas, positions, and arguments are my own, shaped by experience shipping production systems
+            in cloud architecture, AI/ML, and enterprise software.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold mb-3 text-text-bold">How I use AI tools</h2>
+          <p>
+            I use AI tools as part of my workflow. Specifically:
+          </p>
+          <ul>
+            <li><strong>Writing assistance:</strong> I may use LLMs to help with grammar, phrasing, and structure. The substance and direction of every piece is mine.</li>
+            <li><strong>Code:</strong> I use AI-assisted coding tools for development tasks like refactoring, boilerplate, and exploration. All code is reviewed and understood before it ships.</li>
+            <li><strong>Research:</strong> I use AI tools to search, summarize, and cross-reference sources. I verify claims before publishing.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold mb-3 text-text-bold">What I don't do</h2>
+          <ul>
+            <li>I don't publish AI-generated content without substantial human review and editing.</li>
+            <li>I don't use AI to fabricate quotes, data, or sources.</li>
+            <li>I don't use AI to generate opinions I don't hold.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold mb-3 text-text-bold">My position</h2>
+          <p>
+            AI is a tool. Like any tool, its value depends on how it's used. I believe in transparency about AI usage,
+            human oversight at every decision point, and the principle that the person publishing carries responsibility
+            for what they publish — regardless of which tools helped produce it.
+          </p>
+        </div>
+      </div>
+    </section>
+  </Fragment>
+</PageLayout>

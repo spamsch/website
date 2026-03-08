@@ -5,3 +5,9 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+[[headers]]
+  for = "/human.json"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "application/json"
